@@ -22,13 +22,17 @@ public class Cliente {
      */
     public static void main(String[] args) throws UnknownHostException, IOException {
         
-        Socket cliente = new Socket("127.0.0.1", 5100);
+        String nomeArq = args[0];
+        String host = args[1]; // 127.0.0.1
+        Integer port = Integer.parseInt(args[2]); // 5100
+        
+        Socket cliente = new Socket(host, port);
 
         ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
-        //File file = new File("/home/henrique/teste.txt"); 
-        FileInputStream fis = new FileInputStream("/home/henrique/02.vcf");
+        
+        FileInputStream fis = new FileInputStream(nomeArq);
 
-        int size = fis.available();
+        //int size = fis.available();
 
         byte[] buf = new byte[4096];
         System.out.println("Enviando arquivo...");
