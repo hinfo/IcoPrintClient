@@ -10,7 +10,10 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -27,7 +30,7 @@ public class Cliente {
         if (args.length < 3){
             System.out.println("Faltam parametros!\n"
                     + "Comando: java -jar IcoPrintClient.jar + nome_do_arquivo + ip_servidor + "
-                    + "porta + (opcional) nome_impressora");
+                    + "porta ");
             System.exit(0);
         }
         String nomeArq = args[0];
@@ -36,17 +39,40 @@ public class Cliente {
         String nomeImpressora = "Impressora padrão";
         
         
-        
         File f = new File(nomeArq);
-        Socket cliente = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
-        out.writeUTF(f.getName());
-        if (args.length > 3) { 
-            nomeImpressora = args[3];
-            ObjectOutputStream nomeImp = new ObjectOutputStream(cliente.getOutputStream());
-            nomeImp.writeUTF(nomeImpressora);
+        try {
+            Socket cliente = new Socket(host, port);
+
+            ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
+            out.writeUTF(f.getName());
+            
+            if (args.length > 3) {
+                nomeImpressora = args[3];
+            }
+            
+            FileInputStream fis = new FileInputStream(f);
+
+            int size = fis.available();
+
+            byte[] buf = new byte[4096];
+            System.out.println("Enviando arquivo...");
+            while (true) {
+                int len = fis.read(buf);
+                if (len == -1) {
+                    break;
+                }
+
+                out.write(buf, 0, len);
+            }
+            fis.close();
+            out.flush();
+            System.out.println("Arquivo enviado para impressão!\nVerifique se foi impresso.");
+            
+            
+        } catch(ConnectException e){
+            System.out.println("Conexão recusada, servidor offline");
+            System.exit(1);
         }
-        FileInputStream fis = new FileInputStream(f);
         
         
 
@@ -56,21 +82,6 @@ public class Cliente {
 //        System.out.println("nome port: " + port);
 //        System.out.println("nome impressora: " + nomeImpressora);
 
-        int size = fis.available();
-
-        byte[] buf = new byte[4096];
-        System.out.println("Enviando arquivo...");
-        while (true) {
-            int len = fis.read(buf);
-            if (len == -1) break;
-            
-            out.write(buf, 0, len);
-        }
-        fis.close();
-        out.flush();
-        out.close();
-        
-        System.out.println("Arquivo enviado!");
 
     }
 }
