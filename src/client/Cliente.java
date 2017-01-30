@@ -1,17 +1,9 @@
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package client;
 
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
@@ -36,7 +28,7 @@ public class Cliente {
         String nomeArq = args[0];
         String host = args[1]; // 127.0.0.1
         Integer port = Integer.parseInt(args[2]); // 5100
-        String nomeImpressora = "Impressora padrão";
+        String nomeImpressora = "Impressora padrão"; // não implementado.
         
         
         File f = new File(nomeArq);
@@ -74,14 +66,5 @@ public class Cliente {
             System.exit(1);
         }
         
-        
-
-
-//        System.out.println("nome Arq: " + f.getName());
-//        System.out.println("nome host: " + host);
-//        System.out.println("nome port: " + port);
-//        System.out.println("nome impressora: " + nomeImpressora);
-
-
     }
 }
