@@ -16,7 +16,11 @@ public class Test {
     
     public static void main(String[] args) throws IOException {
     Cliente test = new Cliente();
-        String[] arguments = {"/home/henrique/teste.txt","192.168.0.106","5100"};
+//        String arq = "/home/icone/teste_registro_de_saidas.pdf";
+        String arq = "/ico/bellart/cgi-bin/sac/validade.txt";
+//        String arq = "/home/icone/teste.txt";
+//        String[] arguments = {arq,"192.168.250.181","5100"};
+        String[] arguments = {arq,"192.168.250.21","5100"};
         test.main(arguments);
     }
     
