@@ -31,6 +31,8 @@ public class Cliente {
      */
     public static void main(String[] args) throws UnknownHostException, IOException {
 
+        Comandos cmds = new Comandos();
+        
         String nomeArq = null;
         String host = null;
         Integer port = null;
@@ -44,19 +46,24 @@ public class Cliente {
             help();
         } else {
              nomeArq = args[0];
+             cmds.setNomeArquivo(args[0]);
              host = args[1]; // 127.0.0.1
              port = Integer.parseInt(args[2]); // 5100
 //        System.out.println("tm args " + args.length);
             if (args.length == 4) {
                 comando1 = args[3];
+                cmds.setExecuta(args[3]);
             } else if (args.length == 5) {
                 comando1 = args[3];
                 comando2 = args[4];
+                cmds.setExecuta(args[3]);
+                cmds.setCmdExtra(args[4]);
             }
         }
         String nomeImpressora = "Impressora padrão"; // não implementado.
 
         File arquivoParaImpressao = new File(nomeArq);
+//        File arquivoParaImpressao = new File(cmds.getNomeArquivo());
         try {
             socket = new Socket(host, port);
 
@@ -65,6 +72,8 @@ public class Cliente {
             output.writeUTF(arquivoParaImpressao.getName()
                     + " " + comando1
                     + " " + comando2);
+            
+//            output.writeObject(cmd);
 
             if (args.length > 3) {
                 nomeImpressora = args[3];
@@ -104,7 +113,7 @@ public class Cliente {
 
     }
 
-    private byte[] serializarArquivo(Arquivo arquivo) {
+    private byte[] serializarArquivo(Comandos arquivo) {
         try {
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             ObjectOutputStream ous;
