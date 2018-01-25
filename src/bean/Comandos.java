@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client;
+package bean;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Comandos implements Serializable {
 
     private String nomeArquivo;
-    private String executa;
+    private String cmdExecuta;
     private String cmdExtra;
 
     public String getNomeArquivo() {
@@ -25,12 +25,12 @@ public class Comandos implements Serializable {
         this.nomeArquivo = nomeArquivo;
     }
 
-    public String getExecuta() {
-        return executa;
+    public String getCmdExecuta() {
+        return cmdExecuta;
     }
 
-    public void setExecuta(String executa) {
-        this.executa = executa;
+    public void setCmdExecuta(String cmdExecuta) {
+        this.cmdExecuta = cmdExecuta;
     }
 
     public String getCmdExtra() {
