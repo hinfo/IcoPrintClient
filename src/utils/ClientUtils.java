@@ -11,19 +11,18 @@ package utils;
  */
 public class ClientUtils {
     public static void help() {
-        String msg
-                = "Parâmetros Obrigatórios:\n"
-                + "\tComando: java -jar IcoPrintClient.jar "
-                + "+ <nome_do_arquivo> + <ip_servidor> + "
-                + "<porta> \n"
-                + "Parâmetros opcionais:\n"
-                + "\t1-EXECUTA=<executável do windows> \n"
-                + "\t2-<arquivo>\n"
-                + "Exemplo: \n"
-                + "\tjava -jar IcoPrintClient.jar "
-                + "teste.txt 192.168.0.250 5001 EXECUTA=xxxxx.exe teste.txt";
-
-        System.out.println(msg);
+        StringBuilder msg =  new StringBuilder();
+        msg.append("Parâmetros Obrigatórios:\n");
+        msg.append("\tComando: java -jar IcoPrintClient.jar ");
+        msg.append("+ <nome_do_arquivo> + <ip_servidor> + ");
+        msg.append("<porta> \n");
+        msg.append("Parâmetros opcionais:\n");
+        msg.append("\t1-EXECUTA=<executável do windows> \n");
+        msg.append("\t2-<arquivo>\n");
+        msg.append("Exemplo: \n");
+        msg.append("\tjava -jar IcoPrintClient.jar ");
+        msg.append("teste.txt 192.168.0.250 5001 EXECUTA=xxxxx.exe teste.txt");
+        System.out.println(msg.toString());
     }
     
     public static String serviceArgs(String arg){
@@ -33,5 +32,10 @@ public class ClientUtils {
         } else {
             return arg;
         }
+    }
+    public static String removeStashNomeArquivo(String arg){
+        String[] slices = arg.split("/");
+        String nome = slices[slices.length-1];
+        return nome;
     }
 }
