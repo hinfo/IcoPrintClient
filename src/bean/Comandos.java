@@ -17,6 +17,8 @@ public class Comandos implements Serializable {
     private String cmdExecuta;
     private String cmdExtra;
     private String nomeImpressora;
+    private String version;
+  
 
     public String getNomeArquivo() {
         return nomeArquivo;
@@ -48,6 +50,14 @@ public class Comandos implements Serializable {
 
     public void setNomeImpressora(String nomeImpressora) {
         this.nomeImpressora = nomeImpressora;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
     
     

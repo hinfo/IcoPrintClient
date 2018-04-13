@@ -20,6 +20,9 @@ public class Client {
     private static Socket socket;
     private static ObjectInputStream entrada;
     private static ObjectOutputStream output;
+    private static final String VERSION = "1.1.2";
+   
+    
 
     /**
      * @param args the command line arguments args[0] nome do arquivo args[1]
@@ -61,6 +64,7 @@ public class Client {
                 }
             }
         }
+        cmds.setVersion(VERSION);
 //        switch (qtdeParams) {
 //            case 1: // just the command
 //                util.help();
@@ -127,6 +131,7 @@ public class Client {
             byte[] buf = new byte[fis.available()];
             int len;
             System.out.println("Enviando arquivo...");
+            System.out.println("Versão: " + VERSION);
             while ((len = fis.read(buf)) > 0) {
                 output.write(buf, 0, len);
             }
