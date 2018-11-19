@@ -31,8 +31,9 @@ public class Client {
      */
     public static void main(String[] args) throws UnknownHostException, IOException {
 
-        Comandos cmds = new Comandos();
-        ClientUtils util = new ClientUtils();
+        Comandos cmds;
+        cmds = Comandos.getInstance();
+        ClientUtils util = ClientUtils.getInstance();
 
         String nomeArq = null;
         String host = null;

@@ -10,6 +10,21 @@ package utils;
  * @author icone
  */
 public class ClientUtils {
+    
+    public static ClientUtils instance;
+
+    private ClientUtils() {
+        
+    }
+    
+    public static ClientUtils getInstance(){
+        if ( instance == null ){
+            instance = new ClientUtils();
+        }
+        return instance;
+    }
+    
+    
     public static void help() {
         StringBuilder msg =  new StringBuilder();
         msg.append("Parâmetros Obrigatórios:\n");

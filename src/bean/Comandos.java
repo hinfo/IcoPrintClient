@@ -18,7 +18,17 @@ public class Comandos implements Serializable {
     private String cmdExtra;
     private String nomeImpressora;
     private String version;
-  
+    public static Comandos instance;
+
+    private Comandos() {
+    }
+
+    public static Comandos getInstance() {
+        if (instance == null) {
+            instance = new Comandos();
+        }
+        return instance;
+    }
 
     public String getNomeArquivo() {
         return nomeArquivo;
@@ -59,6 +69,5 @@ public class Comandos implements Serializable {
     public void setVersion(String version) {
         this.version = version;
     }
-    
-    
+
 }
